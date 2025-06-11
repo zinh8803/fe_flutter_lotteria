@@ -4,6 +4,7 @@ import 'package:frontend_appflowershop/bloc/cart/cart_bloc.dart';
 import 'package:frontend_appflowershop/bloc/cart/cart_event.dart';
 import 'package:frontend_appflowershop/bloc/cart/cart_state.dart';
 import 'package:frontend_appflowershop/views/screens/checkout_screen.dart';
+import 'package:intl/intl.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -61,6 +62,8 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = NumberFormat.currency(locale: 'vi_VN', symbol: '₫');
+
     context.read<CartBloc>().add(LoadCartEvent());
 
     return BlocConsumer<CartBloc, CartState>(
@@ -214,7 +217,7 @@ class CartScreen extends StatelessWidget {
                                             ),
                                             const SizedBox(height: 8),
                                             Text(
-                                              '${cartItem.product.price.toStringAsFixed(0)}đ',
+                                              '${formatCurrency.format(cartItem.product.price)}',
                                               style: TextStyle(
                                                 fontSize: 16,
                                                 color: Colors.red[700],
@@ -367,7 +370,7 @@ class CartScreen extends StatelessWidget {
                                           ),
                                         ),
                                         Text(
-                                          '${state.totalPrice.toStringAsFixed(0)}đ',
+                                          '${formatCurrency.format(state.totalPrice)}',
                                           style: TextStyle(
                                             fontSize: 18,
                                             color: Colors.red[700],

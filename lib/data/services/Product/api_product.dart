@@ -41,7 +41,35 @@ class ApiService_product {
   }
 
   Future<List<ProductModel>> getProducts() async {
-    final String url = "${Constants.baseUrl}/products/bestseller";
+    // final String url = "${Constants.baseUrl}/products/bestseller";
+    final String url = "${Constants.baseUrl}/products";
+    try {
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> jsonResponse = json.decode(response.body);
+        print(
+            'ApiService_product: Fetching products from ${Constants.baseUrl}/products');
+        print('ApiService_product: Response status: ${response.statusCode}');
+        print('ApiService_product: Response body: ${response.body}');
+
+        if (jsonResponse['status'] == 200) {
+          return (jsonResponse['data'] as List)
+              .map((item) => ProductModel.fromJson(item))
+              .toList();
+        } else {
+          throw Exception("Lỗi API: ${jsonResponse['message']}");
+        }
+      } else {
+        throw Exception("Lỗi kết nối: ${response.statusCode}");
+      }
+    } catch (e) {
+      throw Exception("Lỗi: $e");
+    }
+  }
+
+  Future<List<ProductModel>> getProductsfull() async {
+    final String url = "${Constants.baseUrl}/products";
 
     try {
       final response = await http.get(Uri.parse(url));

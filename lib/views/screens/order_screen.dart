@@ -39,6 +39,8 @@ class _OrderScreenState extends State<OrderScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = NumberFormat.currency(locale: 'vi_VN', symbol: '₫');
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -200,7 +202,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                     ),
                                     const SizedBox(height: 4),
                                     Text(
-                                      '${order.totalPrice.toStringAsFixed(0)}đ',
+                                      '${formatCurrency.format(order.totalPrice)}',
                                       style: TextStyle(
                                         fontSize: 16,
                                         color: Colors.red[700],

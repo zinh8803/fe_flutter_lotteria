@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend_appflowershop/data/services/cart/cart_service.dart';
+import 'package:intl/intl.dart';
 import '../../../data/models/product.dart';
 import '../../screens/product_detail_screen.dart';
 
@@ -22,12 +23,14 @@ class CategoryProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = NumberFormat.currency(locale: 'vi_VN', symbol: '₫');
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ProductDetailScreen(productId: product.product_id),
+            builder: (context) =>
+                ProductDetailScreen(productId: product.product_id),
           ),
         );
       },
@@ -76,9 +79,9 @@ class CategoryProductItem extends StatelessWidget {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    '${product.price}đ',
+                    formatCurrency.format(product.price),
                     style: const TextStyle(
-                      fontSize: 11,
+                      fontSize: 14,
                       color: Colors.red,
                       fontWeight: FontWeight.bold,
                     ),

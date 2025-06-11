@@ -5,6 +5,7 @@ import 'package:frontend_appflowershop/bloc/product/product_detail/product_detai
 import 'package:frontend_appflowershop/bloc/product/product_detail/product_detail_state.dart';
 import 'package:frontend_appflowershop/data/models/product.dart';
 import 'package:frontend_appflowershop/data/services/cart/cart_service.dart';
+import 'package:intl/intl.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final int productId;
@@ -37,6 +38,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = NumberFormat.currency(locale: 'vi_VN', symbol: '₫');
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Chi tiết sản phẩm'),
@@ -95,7 +98,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          '${product.price}đ',
+                          '${formatCurrency.format(product.price)}',
                           style: const TextStyle(
                             fontSize: 20,
                             color: Colors.red,

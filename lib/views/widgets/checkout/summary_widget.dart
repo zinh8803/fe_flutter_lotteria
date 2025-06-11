@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:intl/src/intl/number_format.dart';
 
 class SummaryWidget extends StatelessWidget {
   final double totalPrice;
 
-  const SummaryWidget({super.key, required this.totalPrice});
+  const SummaryWidget(
+      {super.key,
+      required this.totalPrice,
+      required NumberFormat formatCurrency});
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = NumberFormat.currency(locale: 'vi_VN', symbol: '₫');
+
     return Column(
       children: [
         const Divider(),
@@ -15,7 +21,7 @@ class SummaryWidget extends StatelessWidget {
           children: [
             const Text('Tạm tính:', style: TextStyle(fontSize: 16)),
             Text(
-              '${totalPrice.toStringAsFixed(0)}đ',
+              '${formatCurrency.format(totalPrice)}',
               style: const TextStyle(
                 fontSize: 16,
                 color: Colors.red,
@@ -45,7 +51,7 @@ class SummaryWidget extends StatelessWidget {
           children: [
             const Text('Tổng tiền:', style: TextStyle(fontSize: 16)),
             Text(
-              '${totalPrice.toStringAsFixed(0)}đ',
+              '${formatCurrency.format(totalPrice)}',
               style: const TextStyle(
                 fontSize: 16,
                 color: Colors.red,

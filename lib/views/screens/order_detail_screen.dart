@@ -23,6 +23,8 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = NumberFormat.currency(locale: 'vi_VN', symbol: '₫');
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Chi tiết đơn hàng'),
@@ -53,7 +55,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                   ),
                   const SizedBox(height: 16),
                   _buildInfoRow(
-                      'Tổng giá', '${order.totalPrice.toStringAsFixed(0)}đ'),
+                      'Tổng giá', '${formatCurrency.format(order.totalPrice)}'),
                   _buildInfoRow('Trạng thái', order.status),
                   _buildInfoRow('Ngày mua', formattedDate),
                   _buildInfoRow('Người nhận', order.name),
@@ -86,7 +88,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text('Số lượng: ${item.quantity}'),
-                              Text('Giá: ${item.price.toStringAsFixed(0)}đ'),
+                              Text('Giá: ${formatCurrency.format(item.price)}'),
                             ],
                           ),
                         ),

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend_appflowershop/data/services/cart/cart_service.dart';
 import 'package:frontend_appflowershop/views/screens/product_detail_screen.dart';
 import '../../../data/models/product.dart';
+import 'package:intl/intl.dart';
 
 class ProductWidget extends StatelessWidget {
   final ProductModel product;
@@ -21,6 +22,8 @@ class ProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = NumberFormat.currency(locale: 'vi_VN', symbol: '₫');
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -69,13 +72,18 @@ class ProductWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        '${product.price}đ',
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            formatCurrency.format(product.price),
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
                       IconButton(
                         icon: const Icon(

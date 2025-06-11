@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend_appflowershop/bloc/product/product_list/product_bloc.dart';
 import 'package:frontend_appflowershop/bloc/product/product_list/product_state.dart';
 import 'package:frontend_appflowershop/data/models/product.dart';
+import 'package:intl/intl.dart';
 
 class ProductList extends StatelessWidget {
   const ProductList({super.key});
@@ -26,7 +27,7 @@ class ProductList extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             padding: const EdgeInsets.all(16),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, // 2 sản phẩm mỗi hàng
+              crossAxisCount: 2,
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
               childAspectRatio: 0.7,
@@ -51,6 +52,7 @@ class _AdminProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = NumberFormat.currency(locale: 'vi_VN', symbol: '₫');
     return Card(
       elevation: 2,
       child: Column(
@@ -81,8 +83,9 @@ class _AdminProductCard extends StatelessWidget {
           // Giá
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Text('${product.price}đ'),
+            child: Text('${formatCurrency.format(product.price)}đ'),
           ),
+
           // Nút sửa/xóa
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

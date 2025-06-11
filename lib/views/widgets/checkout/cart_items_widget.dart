@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_appflowershop/data/models/cart_item.dart';
+import 'package:intl/intl.dart';
 
 class CartItemsWidget extends StatelessWidget {
   final List<CartItem> cartItems;
@@ -8,6 +9,8 @@ class CartItemsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = NumberFormat.currency(locale: 'vi_VN', symbol: '₫');
+
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -42,7 +45,7 @@ class CartItemsWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '${cartItem.product.price.toStringAsFixed(0)}đ x ${cartItem.quantity} = ${(cartItem.product.price * cartItem.quantity).toStringAsFixed(0)}đ',
+                      '${formatCurrency.format(cartItem.product.price)} x ${cartItem.quantity} = ${(formatCurrency.format(cartItem.product.price * cartItem.quantity))}',
                       style: const TextStyle(
                         fontSize: 14,
                         color: Colors.red,

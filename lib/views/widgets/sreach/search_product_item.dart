@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend_appflowershop/data/services/cart/cart_service.dart';
 import 'package:frontend_appflowershop/data/models/product.dart';
 import 'package:frontend_appflowershop/views/screens/product_detail_screen.dart';
+import 'package:intl/intl.dart';
 
 class SearchProductItem extends StatelessWidget {
   final ProductModel product;
@@ -22,6 +23,8 @@ class SearchProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = NumberFormat.currency(locale: 'vi_VN', symbol: '₫');
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -80,10 +83,10 @@ class SearchProductItem extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    '${product.price.toStringAsFixed(0)}đ',
+                    '${formatCurrency.format(product.price)}',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.green[700],
+                      color: Colors.red[700],
                       fontWeight: FontWeight.bold,
                     ),
                   ),
