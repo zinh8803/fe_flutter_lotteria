@@ -15,6 +15,7 @@ import 'package:frontend_appflowershop/bloc/product/product_list/product_event.d
 import 'package:frontend_appflowershop/bloc/product/product_list/product_state.dart';
 import 'package:frontend_appflowershop/data/models/category.dart';
 import 'package:frontend_appflowershop/data/models/product.dart';
+import 'package:intl/intl.dart';
 
 class AdminProductScreen extends StatefulWidget {
   const AdminProductScreen({super.key});
@@ -275,6 +276,7 @@ class _AdminProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = NumberFormat.currency(locale: 'vi_VN', symbol: '₫');
     return Card(
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -305,7 +307,7 @@ class _AdminProductCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Text(
-              '${product.price}đ',
+              '${formatCurrency.format(product.price)}',
               style: const TextStyle(color: Colors.red),
             ),
           ),
